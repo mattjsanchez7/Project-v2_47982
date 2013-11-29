@@ -11,7 +11,7 @@
 
 //Function Prottypes here
 void displayInstructions();
-void getInput (char []);
+void getInput (char [], int);
 char colorconversion (int);
 int numCorrect (char [], char []);
 int greenCountC (char []);
@@ -60,22 +60,19 @@ int main(int argc, char *argv[]) {
  	correct[2]= colorconversion(randNum3);
  	correct[3]= colorconversion(randNum4);
   
- 	cout<<correct[0]<<correct[1]<<correct[2]<<correct[3]<<endl; 
+ 	//cout<<correct[0]<<correct[1]<<correct[2]<<correct[3]<<endl; 
  	do{ 
- 	getInput(guess); //Function call to output for user to start guessing
+ 	getInput(guess, numguess); //Function call to output for user to start guessing
 	totright=numCorrect(guess, correct);
     cout<<"Total right and in correct position= "<<totright<<endl;
- 	//Count the code colors
+ 	
+	//Count the code colors
  
 	numGc=greenCountC (correct);
-		cout<<"numGc= "<<numGc<<endl;	
 		
 	numYc=yellowCountC (correct);
 		
-	
 	numRc=redCountC (correct);
-	
-
 	
 	numBc=blueCountC (correct);
 		
@@ -159,9 +156,12 @@ void displayInstructions () {
  cout<<"Enter the first letter of each color to guess. You will get 7 guesses."<<endl; cout<<"You have 5 colors to pick from: Green Yellow Red Blue Purple"<<endl;
  cout<<"A sample guess would look like B Y B G"<<endl;
 }
-void getInput (char guess[]) {
- cout<<"Fire away!"<<endl; //Output for guesses
+void getInput (char guess[], int numguess) {
+  numguess=6;
+cout<<"Fire away!"<<endl; //Output for guesses
  cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
+	numguess--;
+cout<<"Guesses left "<<numguess<<endl;
 for (int count= 0; count<4; count++){ //Convert to uppercase
 	if (guess[count]>91)
 	guess[count]= guess[count]-32;
@@ -283,35 +283,29 @@ int purpleCount (char guess[]){
 	return purple;
 }
 int compareG(int &numGc, int &numG){
-		if(numGc<=numG && numGc>0){
-			return numG;
-		}
-		else return 0;
+		if(numGc<=numG)
+		return numGc;
+		else return numG;
 }
 int compareY(int &numYc, int &numY){
-		if(numYc<=numY && numYc>0){
-			return numY;
-		}
-		else return 0;
+		if(numYc<=numY)
+				return numYc;
+				else return numY;
 
 }
 int compareR(int &numRc, int &numR){
-		if(numRc<=numR && numRc>0){
-			return numR;
-		}
-		else return 0;
+		if(numRc<=numR)
+				return numRc;
+				else return numR;
 
 }
 int compareB(int &numBc, int &numB){
-		if(numBc<=numB && numBc>0){
-			return numB;
-		}
-		else return 0;
-
+		if(numBc<=numB)
+				return numBc;
+				else return numB;
 }
 int compareP(int &numPc, int &numP){
-		if(numPc<=numP && numPc>0){
-			return numP;
-		}
-		else return 0;
+		if(numPc<=numP)
+				return numPc;
+				else return numP;
 }
