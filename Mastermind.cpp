@@ -114,8 +114,7 @@ int main(int argc, char *argv[]) {
 	keepsum=keepG+keepY+keepR+keepB+keepP;
 	
 	wrongS=keepsum-totright;
-	if (wrongS<0)
-	wrongS=0;
+
 	cout<<"Right color wrong position= "<<wrongS<<endl;
 	
 	
