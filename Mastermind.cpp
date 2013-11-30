@@ -145,9 +145,9 @@ void displayInstructions () {
  cout<<"++++++++Mastermind++++++"<<endl;
  cout<<"I will generate 4 random stones that can each be"
  <<" 1 of 5 colors allowing duplicates."<<endl;
- cout<<"You will get 7 guesses at the color of each and I will tell you after"  <<" each guess the number of colors that are are correct and in the"  <<" right position"
+ cout<<"You will get 10 guesses at the color of each and I will tell you after"  <<" each guess the number of colors that are are correct and in the"  <<" right position"
  <<" and also the number of colors that are correct but misplaced."<<endl;
- cout<<"Enter the first letter of each color to guess. You will get 7 guesses."<<endl; cout<<"You have 5 colors to pick from: Green Yellow Red Blue Purple"<<endl;
+ cout<<"Enter the first letter of each color to guess."<<endl; cout<<"You have 5 colors to pick from: Green Yellow Red Blue Purple"<<endl;
  cout<<"A sample guess would look like B Y B G"<<endl;
 }
 
