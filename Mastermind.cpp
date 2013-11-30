@@ -39,10 +39,10 @@ int main(int argc, char *argv[]) {
  	char correct[4], guess[4]; //Variable for numbers/colors generated
  	char again; //Input by user to play again
     int numguess=0, guessleft=10; //Number of user guesses
-	int numGc, numYc, numRc, numBc, numPc; 
-	int numG, numY, numR, numB, numP; 
-	int keepG, keepY, keepB, keepR, keepP, keepsum;
-	int wrongS, totright;
+	int numGc, numYc, numRc, numBc, numPc; //Count the colors in the code
+	int numG, numY, numR, numB, numP; //Count the colors in the guess
+	int keepG, keepY, keepB, keepR, keepP, keepsum; //Keep the smaller of the two and sum them
+	int wrongS, totright; //Variable to display the users right guesses and right colors but in wrong spot
 
  
  	do{
@@ -67,8 +67,7 @@ int main(int argc, char *argv[]) {
     cout<<"Total right and in correct position= "<<totright<<endl;
  	
 	//Count the code colors
- 
-	numGc=greenCountC (correct);
+    numGc=greenCountC (correct);
 		
 	numYc=yellowCountC (correct);
 		
@@ -82,58 +81,47 @@ int main(int argc, char *argv[]) {
 	//Count the guess colors
 	numG=greenCount (guess);
 	
-		
-	numY=yellowCount (guess);
-		
+    numY=yellowCount (guess);
 		
 	numR=redCount (guess);
 	
-		
 	numB=blueCount (guess);
 	
-
-		
-	numP=purpleCount (guess);
+    numP=purpleCount (guess);
 	
-	
+	//Compare the two and keep smaller of the two
 	keepG=compareG(numGc, numG);
-	//cout<<"keepG "<<keepG<<endl;
 	
 	keepY=compareY(numYc, numY);
-	//cout<<"keepY "<<keepY<<endl;
 		
 	keepR=compareR(numRc, numR);
-	//cout<<"keepR "<<keepR<<endl;
 			
 	keepB=compareB(numBc, numB);
-	//cout<<"keepB "<<keepB<<endl;
 				
 	keepP=compareP(numPc, numP);
-	//cout<<"keepP "<<keepP<<endl;
 	
+    //Sum the values kept
 	keepsum=keepG+keepY+keepR+keepB+keepP;
 	
+    //Subtract the total from the amount the user got correct
 	wrongS=keepsum-totright;
-
+        
+    //Output the amount of colors the user got but in the wrong spot
 	cout<<"Right color wrong position= "<<wrongS<<endl;
 	
-	
-	
-
-
-        
-    //Break out if user wins
-        if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && 		guess[3]==correct[3]) {
+	//Break out if user wins
+        if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && guess[3]==correct[3]) {
             numguess=10;
         }
         numguess++; //Counter for user guesses
- 	} while (numguess<10); //Limit user guesses to 7
+ 	} while (numguess<10); //Limit user guesses to 10
         
         //Determine if user wins
- 	if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && 	guess[3]==correct[3]) {
+ 	if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && guess[3]==correct[3]) {
  	 cout<<"Congratulations you win!";
  	} else {
-            //If user loses output correct sequence
+        
+        //If user loses output correct sequence
   	cout<<"Sorry try again. Correct sequence was "<<correct[0]<<" "<<correct[1]<<
   	" "<<correct[2]<<" "<<correct[3]<<" "<<endl;
 	 }
@@ -141,14 +129,18 @@ int main(int argc, char *argv[]) {
         //Prompt user to play again
         cout<<" Do you want to play again? (Y/N)?"<<endl;
         cin>>again;
-		 if (again=='Y' || again=='y'){
-		numguess=0;
+		      
+        //If user wants to play again reset the guesses counter to zero
+        if (again=='Y' || again=='y'){
+        numguess=0;
 		guessleft=10;
 		}
         } while (again=='Y' || again=='y');
         //Exit Stage Right
  	return 0;
 }
+
+//Function to display instructions
 void displayInstructions () {
  cout<<"++++++++Mastermind++++++"<<endl;
  cout<<"I will generate 4 random stones that can each be"
@@ -158,6 +150,8 @@ void displayInstructions () {
  cout<<"Enter the first letter of each color to guess. You will get 7 guesses."<<endl; cout<<"You have 5 colors to pick from: Green Yellow Red Blue Purple"<<endl;
  cout<<"A sample guess would look like B Y B G"<<endl;
 }
+
+//Function to get users guesses
 void getInput (char guess[], int &guessleft) {
 cout<<"Fire away!"<<endl; //Output for guesses
  cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
@@ -167,7 +161,9 @@ for (int count= 0; count<4; count++){ //Convert to uppercase
 	if (guess[count]>91)
 	guess[count]= guess[count]-32;
 	}
-} 
+}
+
+//Convert random number to a character representing a color
 char colorconversion (int passNum) {
  switch (passNum) {
   case 1: 
@@ -188,6 +184,7 @@ char colorconversion (int passNum) {
  } 
 }
 
+//Function to determine how many colors were correct and in the right spot.
 int numCorrect (char guess[], char correct[]){
  int totRight=0;
   if (guess[0]==correct[0]) //Determine if 1st color guess is right
@@ -201,6 +198,7 @@ int numCorrect (char guess[], char correct[]){
  return totRight;                  //Return the number right
 }
 
+//Count the greens in the correct code
 int greenCountC(char correct[]){
 	int green=0;  
 	for(int i=0; i<4; i++)
@@ -210,6 +208,8 @@ int greenCountC(char correct[]){
 	return green;
 	
 }
+
+//Count the yellows in the correct code
 int yellowCountC (char correct[]){
 	int yellow=0;  
 	for(int i=0; i<4; i++)
@@ -218,6 +218,8 @@ int yellowCountC (char correct[]){
 	}
 	return yellow;
 }
+
+//Count the reds in the correct code
 int redCountC (char correct[]){
 	int red=0;  
 	for(int i=0; i<4; i++)
@@ -227,6 +229,8 @@ int redCountC (char correct[]){
 	return red;
 	
 }
+
+//Count the blues in the correct code
 int blueCountC (char correct[]){
 	int blue=0;  
 	for(int i=0; i<4; i++)
@@ -235,6 +239,8 @@ int blueCountC (char correct[]){
 	}
 	return blue;
 }
+
+//Count the purples in the correct code
 int purpleCountC (char correct[]){
 	int purple=0;  
 	for(int i=0; i<4; i++)
@@ -243,6 +249,8 @@ int purpleCountC (char correct[]){
 	}
 	return purple;
 }
+
+//Count the in greens the guess code
 int greenCount (char guess[]){
 	int green=0;  
 	for(int i=0; i<4; i++)
@@ -251,6 +259,8 @@ int greenCount (char guess[]){
 	}
 	return green;
 }
+
+//Count the yellows in the guess code
 int yellowCount (char guess[]){
 	int yellow=0;  
 	for(int i=0; i<4; i++)
@@ -259,6 +269,8 @@ int yellowCount (char guess[]){
 	}
 	return yellow;
 }
+
+//Count the reds in the guess code
 int redCount (char guess[]){
 	int red=0;  
 	for(int i=0; i<4; i++)
@@ -267,6 +279,8 @@ int redCount (char guess[]){
 	}
 	return red;
 }
+
+//Count the blues in the guess code
 int blueCount (char guess[]){
 	int blue=0;  
 	for(int i=0; i<4; i++)
@@ -275,6 +289,8 @@ int blueCount (char guess[]){
 	}
 	return blue;
 }
+
+//Count the purples in the guess code
 int purpleCount (char guess[]){
 	int purple=0;  
 	for(int i=0; i<4; i++)
@@ -283,28 +299,38 @@ int purpleCount (char guess[]){
 	}
 	return purple;
 }
+
+//Compare the number of greens in the users guesses and in the correct code and keep the smaller of the two
 int compareG(int &numGc, int &numG){
 		if(numGc<=numG)
 		return numGc;
 		else return numG;
 }
+
+//Compare the number of yellows in the users guesses and in the correct code and keep the smaller of the two
 int compareY(int &numYc, int &numY){
 		if(numYc<=numY)
 				return numYc;
 				else return numY;
 
 }
+
+//Compare the number of reds in the users guesses and in the correct code and keep the smaller of the two
 int compareR(int &numRc, int &numR){
 		if(numRc<=numR)
 				return numRc;
 				else return numR;
 
 }
+
+//Compare the number of blues in the users guesses and in the correct code and keep the smaller of the two
 int compareB(int &numBc, int &numB){
 		if(numBc<=numB)
 				return numBc;
 				else return numB;
 }
+
+//Compare the number of purples in the users guesses and in the correct code and keep the smaller of the two
 int compareP(int &numPc, int &numP){
 		if(numPc<=numP)
 				return numPc;
