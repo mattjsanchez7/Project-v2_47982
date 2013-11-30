@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
  	int randNum1, randNum2, randNum3, randNum4; //Variable to convert input to integer
  	char correct[4], guess[4]; //Variable for numbers/colors generated
  	char again; //Input by user to play again
-    int numguess=0, guessleft=6; //Number of user guesses
+    int numguess=0, guessleft=10; //Number of user guesses
 	int numGc, numYc, numRc, numBc, numPc; 
 	int numG, numY, numR, numB, numP; 
 	int keepG, keepY, keepB, keepR, keepP, keepsum;
@@ -124,10 +124,10 @@ int main(int argc, char *argv[]) {
         
     //Break out if user wins
         if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && 		guess[3]==correct[3]) {
-            numguess=7;
+            numguess=10;
         }
         numguess++; //Counter for user guesses
- 	} while (numguess<7); //Limit user guesses to 7
+ 	} while (numguess<10); //Limit user guesses to 7
         
         //Determine if user wins
  	if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && 	guess[3]==correct[3]) {
@@ -141,8 +141,11 @@ int main(int argc, char *argv[]) {
         //Prompt user to play again
         cout<<" Do you want to play again? (Y/N)?"<<endl;
         cin>>again;
+		 if (again=='Y' || again=='y'){
+		numguess=0;
+		guessleft=10;
+		}
         } while (again=='Y' || again=='y');
- 
         //Exit Stage Right
  	return 0;
 }
