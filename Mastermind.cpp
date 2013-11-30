@@ -11,7 +11,7 @@
 
 //Function Prottypes here
 void displayInstructions();
-void getInput (char [], int);
+void getInput (char [], int &);
 char colorconversion (int);
 int numCorrect (char [], char []);
 int greenCountC (char []);
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
  	int randNum1, randNum2, randNum3, randNum4; //Variable to convert input to integer
  	char correct[4], guess[4]; //Variable for numbers/colors generated
  	char again; //Input by user to play again
-    int numguess=0; //Number of user guesses
+    int numguess=0, guessleft=6; //Number of user guesses
 	int numGc, numYc, numRc, numBc, numPc; 
 	int numG, numY, numR, numB, numP; 
 	int keepG, keepY, keepB, keepR, keepP, keepsum;
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
   
  	//cout<<correct[0]<<correct[1]<<correct[2]<<correct[3]<<endl; 
  	do{ 
- 	getInput(guess, numguess); //Function call to output for user to start guessing
+ 	getInput(guess, guessleft); //Function call to output for user to start guessing
 	totright=numCorrect(guess, correct);
     cout<<"Total right and in correct position= "<<totright<<endl;
  	
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
 	 }
         
         //Prompt user to play again
-        cout<<"Do you want to play again? (Y/N)?"<<endl;
+        cout<<" Do you want to play again? (Y/N)?"<<endl;
         cin>>again;
         } while (again=='Y' || again=='y');
  
@@ -155,12 +155,11 @@ void displayInstructions () {
  cout<<"Enter the first letter of each color to guess. You will get 7 guesses."<<endl; cout<<"You have 5 colors to pick from: Green Yellow Red Blue Purple"<<endl;
  cout<<"A sample guess would look like B Y B G"<<endl;
 }
-void getInput (char guess[], int numguess) {
-  numguess=6;
+void getInput (char guess[], int &guessleft) {
 cout<<"Fire away!"<<endl; //Output for guesses
  cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
-	numguess--;
-cout<<"Guesses left "<<numguess<<endl;
+	guessleft--;
+cout<<"Guesses left "<<guessleft<<endl;
 for (int count= 0; count<4; count++){ //Convert to uppercase
 	if (guess[count]>91)
 	guess[count]= guess[count]-32;
