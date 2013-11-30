@@ -65,6 +65,7 @@ int main(int argc, char *argv[]) {
  	getInput(guess, guessleft); //Function call to output for user to start guessing
 	totright=numCorrect(guess, correct);
     cout<<"Total right and in correct position= "<<totright<<endl;
+	cout<<endl;
  	
 	//Count the code colors
     numGc=greenCountC (correct);
@@ -108,6 +109,7 @@ int main(int argc, char *argv[]) {
         
     //Output the amount of colors the user got but in the wrong spot
 	cout<<"Right color wrong position= "<<wrongS<<endl;
+	cout<<endl;
 	
 	//Break out if user wins
         if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && guess[3]==correct[3]) {
@@ -156,7 +158,15 @@ void getInput (char guess[], int &guessleft) {
 cout<<"Fire away!"<<endl; //Output for guesses
  cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
 	guessleft--;
+	cout<<endl;
 cout<<"Guesses left "<<guessleft<<endl;
+cout<<endl;
+if (guessleft==3)
+cout<<"Warning 3 more tries!!!"<<endl;
+if(guessleft==2)
+cout<<"Warning two tries left"<<endl;
+if(guessleft==1)
+cout<<"Last chance, choose wisely!"<<endl;
 for (int count= 0; count<4; count++){ //Convert to uppercase
 	if (guess[count]>91)
 	guess[count]= guess[count]-32;
