@@ -113,6 +113,7 @@ void displayInstructions () {
  cout<<"A sample guess would look like B Y B G"<<endl;
 }
 
+
 //Function to get users guesses
 void getInput (char guess[], char correct[], int &guessleft, char history[][4], int counter, int hCorrect [], int hWrongS[], int totright) {
 cout<<"Fire away!"<<endl; //Output for guesses
@@ -151,14 +152,14 @@ cout<<"Fire away!"<<endl; //Output for guesses
 	//cout<<"History= "<<history[0]<<endl;
 	guessleft--;
 	cout<<endl;
-cout<<"Guesses left "<<guessleft<<endl;
-cout<<endl;
-if (guessleft==3)
-cout<<"Warning 3 more tries!!!"<<endl;
-if(guessleft==2)
-cout<<"Warning two tries left"<<endl;
-if(guessleft==1)
-cout<<"Last chance, choose wisely!"<<endl;
+	cout<<"Guesses left "<<guessleft<<endl;
+	cout<<endl;
+	if (guessleft==3)
+	cout<<"Warning 3 more tries!!!"<<endl;
+	if(guessleft==2)
+	cout<<"Warning two tries left"<<endl;
+	if(guessleft==1)
+	cout<<"Last chance, choose wisely!"<<endl;
 
 }
 
