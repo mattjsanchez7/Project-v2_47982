@@ -12,14 +12,11 @@
 
 //Function Prottypes here
 void displayInstructions();
-void getInput (char [], char [], int &, char [][4], int, int []);
+void getInput (char [], char [], int &, char [][4], int, int [], int [], int);
 char colorconversion (int);
 int numCorrect (char [], char []);
-int greenCount (char [], char []);
-int yellowCount (char [], char []);
-int redCount (char [], char []);
-int blueCount (char [], char []);
-int purpleCount (char [], char []);
+int wrongSpot (char [], char [], int);
+
 
 
 
@@ -35,7 +32,7 @@ int main(int argc, char *argv[]) {
 	int keepG, keepY, keepB, keepR, keepP, keepsum; //Keep the smaller of the two and sum them
 	int wrongS=0, totright; //Variable to display the users right guesses and right colors but in wrong spot
 	char history[10][4];
-	int counter=0, test[10], index=0;
+	int counter=0, hCorrect[10], hWrongS[10];
  
  	do{
  	displayInstructions(); //Function call to display instructions and begin program.
@@ -58,24 +55,16 @@ int main(int argc, char *argv[]) {
 
 
 
-	getInput(guess, correct, guessleft, history, counter, test); //Function call to output for user to start guessing
+	getInput(guess, correct, guessleft, history, counter, hCorrect, hWrongS, totright); //Function call to output for user to start guessing
 	
 	totright=numCorrect(guess, correct);
     cout<<"Total right and in correct position= "<<totright<<endl;
 	cout<<endl;
  	
-	keepG=greenCount(correct, guess);
-	keepY=yellowCount(correct, guess);
-	keepB=blueCount(correct, guess);
-	keepR=redCount(correct, guess);
-	keepP=purpleCount(correct, guess);
+	wrongS=wrongSpot(guess, correct, totright);
 
 	
-    //Sum the values kept
-	keepsum=keepG+keepY+keepR+keepB+keepP;
-	
-    //Subtract the total from the amount the user got correct
-	wrongS=keepsum-totright;
+ 
         
     //Output the amount of colors the user got but in the wrong spot
 	cout<<"Right color wrong position= "<<wrongS<<endl;
@@ -125,7 +114,7 @@ void displayInstructions () {
 }
 
 //Function to get users guesses
-void getInput (char guess[], char correct[], int &guessleft, char history[][4], int counter, int test []) {
+void getInput (char guess[], char correct[], int &guessleft, char history[][4], int counter, int hCorrect [], int hWrongS[], int totright) {
 cout<<"Fire away!"<<endl; //Output for guesses
  //cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
 	//history[0][0]=guess[0];
@@ -146,11 +135,11 @@ cout<<"Fire away!"<<endl; //Output for guesses
 						cout << history[i][j];
 
 					
-					test[i]=numCorrect(guess, correct);
-					
+					hCorrect[i]=numCorrect(guess, correct);
+					hWrongS[i]=wrongSpot(guess, correct, totright);
 					}
 						
-							 							cout<<" Correct= "<<test[i];
+							 							cout<<" Correct= "<<hCorrect[i]<<" Wrong spot= "<<hWrongS[i];
 
 							cout<<endl;
 							
@@ -209,8 +198,9 @@ int numCorrect (char guess[], char correct[]){
 }
 
 //Count the greens in the correct code
-int greenCount(char correct[], char guess[]){
-	int greenC=0;  
+int wrongSpot(char correct[], char guess[],int totright){
+	int greenC=0; 
+	int sum=0, keepG, keepY, keepR, keepB, keepP;
 	for(int i=0; i<4; i++)
 	if (correct[i]=='G'){
 	greenC++;
@@ -221,13 +211,10 @@ int greenCount(char correct[], char guess[]){
 	green++;
 	}
 	if (greenC<=green)
-	return greenC;
-	else return green;
+	keepG=greenC;
+	else keepG=green;
 	
-}
 
-//Count the yellows in the correct code
-int yellowCount(char correct[], char guess[]){
 	int yellowC=0;  
 	for(int i=0; i<4; i++)
 	if (correct[i]=='Y'){
@@ -239,13 +226,10 @@ int yellowCount(char correct[], char guess[]){
 		yellow++;
 	}
 	if (yellowC<=yellow)
-	return yellowC;
-	else return yellow;
+	keepY= yellowC;
+	else keepY= yellow;
 	
-}
 
-//Count the reds in the correct code
-int redCount(char correct[], char guess[]){
 	int redC=0;  
 	for(int i=0; i<4; i++)
 	if (correct[i]=='R'){
@@ -257,13 +241,10 @@ int redCount(char correct[], char guess[]){
 	red++;
 	}
 	if (redC<=red)
-	return redC;
-	else return red;
+	keepR= redC;
+	else keepR= red;
 	
-}
 
-//Count the blues in the correct code
-int blueCount(char correct[], char guess[]){
 	int blueC=0;  
 	for(int i=0; i<4; i++)
 	if (correct[i]=='B'){
@@ -275,12 +256,9 @@ int blueCount(char correct[], char guess[]){
 	blue++;
 	}
 	if (blueC<=blue)
-	return blueC;
-	else return blue;
-}
+	keepB= blueC;
+	else keepB= blue;
 
-//Count the purples in the correct code
-int purpleCount(char correct[], char guess[]){
 	int purpleC=0;  
 	for(int i=0; i<4; i++)
 	if (correct[i]=='P'){
@@ -292,6 +270,8 @@ int purpleCount(char correct[], char guess[]){
 	purple++;
 	}
 	if (purpleC<=purple)
-	return purpleC;
-	else return purple;
+	keepP= purpleC;
+	else keepP= purple;
+	sum=keepG+keepY+keepR+keepB+keepP;
+	return sum-totright;
 }
