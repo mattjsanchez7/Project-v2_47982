@@ -140,8 +140,6 @@ cout<<"Fire away!"<<endl; //Output for guesses
 			}
 			
 			
-	
-	//cout<<"History= "<<history[0]<<endl;
 	guessleft--;
 	cout<<endl;
 	cout<<"Guesses left "<<guessleft<<endl;
