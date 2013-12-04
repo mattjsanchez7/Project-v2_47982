@@ -6,7 +6,7 @@
 #include <iostream> 
 #include <cstdlib> //For RNG function.
 #include <ctime> //For time function.
-#include <string>
+
 
 //No Global Constants
 
@@ -53,22 +53,12 @@ int main(int argc, char *argv[]) {
  	do{ 
  	
 
+	//Get input and display results
 
-
-	getInput(guess, correct, guessleft, history, counter, hCorrect, hWrongS, totright); //Function call to output for user to start guessing
+	getInput(guess, correct, guessleft, history, counter, hCorrect, hWrongS, totright); 
 	
-	//totright=numCorrect(guess, correct);
-    //cout<<"Total right and in correct position= "<<totright<<endl;
-	//cout<<endl;
- 	
-	//wrongS=wrongSpot(guess, correct, totright);
-
 	
- 
-        
-    //Output the amount of colors the user got but in the wrong spot
-	//cout<<"Right color wrong position= "<<wrongS<<endl;
-	//cout<<endl;
+    
 	
 	//Break out if user wins
         if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && guess[3]==correct[3]) {
@@ -118,9 +108,7 @@ void displayInstructions () {
 void getInput (char guess[], char correct[], int &guessleft, char history[][4], int counter, int hCorrect [], int hWrongS[], int totright) {
 	
 cout<<"Fire away!"<<endl; //Output for guesses
- //cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
-	//history[0][0]=guess[0];
-	
+ 
 	
 		for(int i =0;i<4;i++){
 			cin >> guess[i];
