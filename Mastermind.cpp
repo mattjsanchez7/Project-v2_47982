@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     int numguess=0, guessleft=10; //Number of user guesses
 
 	int keepG, keepY, keepB, keepR, keepP, keepsum; //Keep the smaller of the two and sum them
-	int wrongS=0, totright; //Variable to display the users right guesses and right colors but in wrong spot
+	int wrongS=0, totright=0; //Variable to display the users right guesses and right colors but in wrong spot
 	char history[10][4];
 	int counter=0, hCorrect[10], hWrongS[10];
  
@@ -57,18 +57,18 @@ int main(int argc, char *argv[]) {
 
 	getInput(guess, correct, guessleft, history, counter, hCorrect, hWrongS, totright); //Function call to output for user to start guessing
 	
-	totright=numCorrect(guess, correct);
-    cout<<"Total right and in correct position= "<<totright<<endl;
-	cout<<endl;
+	//totright=numCorrect(guess, correct);
+    //cout<<"Total right and in correct position= "<<totright<<endl;
+	//cout<<endl;
  	
-	wrongS=wrongSpot(guess, correct, totright);
+	//wrongS=wrongSpot(guess, correct, totright);
 
 	
  
         
     //Output the amount of colors the user got but in the wrong spot
-	cout<<"Right color wrong position= "<<wrongS<<endl;
-	cout<<endl;
+	//cout<<"Right color wrong position= "<<wrongS<<endl;
+	//cout<<endl;
 	
 	//Break out if user wins
         if (guess[0]==correct[0] && guess[1]==correct[1] && guess[2]==correct[2] && guess[3]==correct[3]) {
@@ -116,19 +116,24 @@ void displayInstructions () {
 
 //Function to get users guesses
 void getInput (char guess[], char correct[], int &guessleft, char history[][4], int counter, int hCorrect [], int hWrongS[], int totright) {
+	
 cout<<"Fire away!"<<endl; //Output for guesses
  //cin>>guess[0]>>guess[1]>>guess[2]>>guess[3]; //Input guesses
 	//history[0][0]=guess[0];
 	
 	
-		for(int j =0;j<4;j++){
-			cin >> guess[j];
-			if (guess[j]>91)
-				guess[j]= guess[j]-32;			
-				history[counter][j]=guess[j];
+		for(int i =0;i<4;i++){
+			cin >> guess[i];
+			if (guess[i]>91)
+				guess[i]= guess[i]-32;			
+				history[counter][i]=guess[i];
 
+		
+		
 		}
 			
+			hCorrect[counter]=numCorrect(guess, correct);
+					hWrongS[counter]=wrongSpot(guess, correct, hCorrect[counter]);
 			
 			for (int i=0; i<counter+1; i++){
 					cout<<"History "<<i+1 << " ";
@@ -136,8 +141,7 @@ cout<<"Fire away!"<<endl; //Output for guesses
 						cout << history[i][j];
 
 					
-					hCorrect[i]=numCorrect(guess, correct);
-					hWrongS[i]=wrongSpot(guess, correct, totright);
+					
 					}
 						
 							 							cout<<" Correct= "<<hCorrect[i]<<" Wrong spot= "<<hWrongS[i];
