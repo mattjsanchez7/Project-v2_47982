@@ -10,7 +10,7 @@
 
 //No Global Constants
 
-//Function Prottypes here
+//Function Prototypes here
 void displayInstructions();
 void getInput (char [], char [], int &, char [][4], int, int [], int [], int);
 char colorconversion (int);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
  	char again; //Input by user to play again
     int numguess=0, guessleft=10; //Number of user guesses
 
-	int keepG, keepY, keepB, keepR, keepP, keepsum; //Keep the smaller of the two and sum them
+
 	int wrongS=0, totright=0; //Variable to display the users right guesses and right colors but in wrong spot
 	char history[10][4];
 	int counter=0, hCorrect[10], hWrongS[10];
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
  	correct[2]= colorconversion(randNum3);
  	correct[3]= colorconversion(randNum4);
   
- 	cout<<correct[0]<<correct[1]<<correct[2]<<correct[3]<<endl; 
+ 	//cout<<correct[0]<<correct[1]<<correct[2]<<correct[3]<<endl; Optional to display correct code
  	do{ 
  	
 
